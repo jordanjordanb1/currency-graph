@@ -10,13 +10,12 @@ type ExchangeRateSymbols = {
   [key: string]: ExchangeRateSymbol;
 };
 
-export const countryCodeQuery = selector({
-  key: 'countryCodeState',
+export const currencyQuery = selector({
+  key: 'currencyState',
   get: async () => {
     const hasSessionStorage = 'sessionStorage' in window;
 
-    const cachedData =
-      hasSessionStorage && sessionStorage.getItem('countryCodes');
+    const cachedData = hasSessionStorage && sessionStorage.getItem('currencys');
 
     if (cachedData) {
       const parsedData = JSON.parse(cachedData) as ExchangeRateSymbol[];
@@ -31,7 +30,7 @@ export const countryCodeQuery = selector({
     const symbols = Object.values(data.symbols);
 
     if (hasSessionStorage) {
-      sessionStorage.setItem('countryCodes', JSON.stringify(symbols));
+      sessionStorage.setItem('currencys', JSON.stringify(symbols));
     }
 
     return symbols;

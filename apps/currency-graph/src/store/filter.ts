@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-export const countryCodeFilterState = atom<string>({
-  key: 'countryCodeFilterState',
+export const currencyFilterState = atom<string>({
+  key: 'currencyFilterState',
   default: 'USD',
 });
 

@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import { FC, memo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { countryCodeFilterState, countryCodeQuery } from '../../../store';
+import { currencyFilterState, currencyQuery } from '../../../store';
 import { countryToFlag } from '../../../utils';
 
 type ExchangeRateSymbol = {
@@ -12,15 +12,15 @@ type ExchangeRateSymbol = {
   code: string;
 };
 
-export const CountryCodes: FC = memo(() => {
-  const countryCodes = useRecoilValue(countryCodeQuery);
-  const [, setCountryCode] = useRecoilState(countryCodeFilterState);
+export const Currency: FC = memo(() => {
+  const currency = useRecoilValue(currencyQuery);
+  const [, setCurrency] = useRecoilState(currencyFilterState);
   const [value, setValue] = useState<ExchangeRateSymbol>({
     code: 'USD',
     description: 'United States Dollar',
   });
   const [open, setOpen] = useState(false);
-  const loading = open && !countryCodes.length;
+  const loading = open && !currency.length;
 
   const handleOnOpen = () => setOpen(true);
   const handleOnClose = () => setOpen(false);
@@ -36,7 +36,7 @@ export const CountryCodes: FC = memo(() => {
   const handleChange = (_e: any, value: ExchangeRateSymbol) => {
     setValue(value);
 
-    setCountryCode(value?.code || '');
+    setCurrency(value?.code || '');
   };
 
   return (
@@ -51,7 +51,7 @@ export const CountryCodes: FC = memo(() => {
       onChange={handleChange}
       isOptionEqualToValue={handleIsOptionEqualToValue}
       getOptionLabel={handleGetOptionLabel}
-      options={countryCodes}
+      options={currency}
       loading={loading}
       renderOption={(props, option) => (
         <Box
