@@ -15,7 +15,10 @@ type ExchangeRateSymbol = {
 export const CountryCodes: FC = memo(() => {
   const countryCodes = useRecoilValue(countryCodeQuery);
   const [, setCountryCode] = useRecoilState(countryCodeFilterState);
-  const [value, setValue] = useState<ExchangeRateSymbol | null>(null);
+  const [value, setValue] = useState<ExchangeRateSymbol>({
+    code: 'USD',
+    description: 'United States Dollar',
+  });
   const [open, setOpen] = useState(false);
   const loading = open && !countryCodes.length;
 
@@ -30,7 +33,7 @@ export const CountryCodes: FC = memo(() => {
   const handleGetOptionLabel = (option: ExchangeRateSymbol) =>
     `${option.code} - ${option.description}`;
 
-  const handleChange = (_e: any, value: ExchangeRateSymbol | null) => {
+  const handleChange = (_e: any, value: ExchangeRateSymbol) => {
     setValue(value);
 
     setCountryCode(value?.code || '');
@@ -39,6 +42,7 @@ export const CountryCodes: FC = memo(() => {
   return (
     <Autocomplete
       sx={{ width: 400 }}
+      disableClearable
       autoHighlight
       open={open}
       onOpen={handleOnOpen}
