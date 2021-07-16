@@ -2,8 +2,9 @@ import Autocomplete from '@material-ui/core/Autocomplete';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
-import Axios from 'axios';
-import { FC, memo, useEffect, useState } from 'react';
+import { FC, memo, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { countryCodeQuery } from '../../../store';
 import { countryToFlag } from '../../../utils';
 
 type ExchangeRateSymbol = {
@@ -11,44 +12,10 @@ type ExchangeRateSymbol = {
   code: string;
 };
 
-type ExchangeRateSymbols = {
-  [key: string]: ExchangeRateSymbol;
-};
-
 export const CountryCodes: FC = memo(() => {
+  const countryCodes = useRecoilValue(countryCodeQuery);
   const [open, setOpen] = useState(false);
-  const [options, setOptions] = useState<ExchangeRateSymbol[]>([]);
-  const loading = open && options.length === 0;
-
-  useEffect(() => {
-    let active = true;
-
-    if (!loading) {
-      return undefined;
-    }
-
-    (async () => {
-      const { data } = await Axios.get<{ symbols: ExchangeRateSymbols }>(
-        'https://api.exchangerate.host/symbols'
-      );
-
-      const symbols = Object.values(data.symbols);
-
-      if (active) {
-        setOptions([...symbols]);
-      }
-    })();
-
-    return () => {
-      active = false;
-    };
-  }, [loading]);
-
-  useEffect(() => {
-    if (!open) {
-      setOptions([]);
-    }
-  }, [open]);
+  const loading = open && !countryCodes.length;
 
   const handleOnOpen = () => setOpen(true);
   const handleOnClose = () => setOpen(false);
@@ -69,7 +36,7 @@ export const CountryCodes: FC = memo(() => {
       onClose={handleOnClose}
       isOptionEqualToValue={handleIsOptionEqualToValue}
       getOptionLabel={handleGetOptionLabel}
-      options={options}
+      options={countryCodes}
       loading={loading}
       renderOption={(props, option) => (
         <Box
