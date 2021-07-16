@@ -3,8 +3,8 @@ import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import { FC, memo, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { countryCodeQuery } from '../../../store';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { countryCodeFilterState, countryCodeQuery } from '../../../store';
 import { countryToFlag } from '../../../utils';
 
 type ExchangeRateSymbol = {
@@ -14,6 +14,8 @@ type ExchangeRateSymbol = {
 
 export const CountryCodes: FC = memo(() => {
   const countryCodes = useRecoilValue(countryCodeQuery);
+  const [, setCountryCode] = useRecoilState(countryCodeFilterState);
+  const [value, setValue] = useState<ExchangeRateSymbol | null>(null);
   const [open, setOpen] = useState(false);
   const loading = open && !countryCodes.length;
 
@@ -28,12 +30,21 @@ export const CountryCodes: FC = memo(() => {
   const handleGetOptionLabel = (option: ExchangeRateSymbol) =>
     `${option.code} - ${option.description}`;
 
+  const handleChange = (_e: any, value: ExchangeRateSymbol | null) => {
+    setValue(value);
+
+    setCountryCode(value?.code || '');
+  };
+
   return (
     <Autocomplete
       sx={{ width: 400 }}
+      autoHighlight
       open={open}
       onOpen={handleOnOpen}
       onClose={handleOnClose}
+      value={value}
+      onChange={handleChange}
       isOptionEqualToValue={handleIsOptionEqualToValue}
       getOptionLabel={handleGetOptionLabel}
       options={countryCodes}

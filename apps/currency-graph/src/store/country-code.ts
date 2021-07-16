@@ -19,7 +19,9 @@ export const countryCodeQuery = selector({
       hasSessionStorage && sessionStorage.getItem('countryCodes');
 
     if (cachedData) {
-      return JSON.parse(cachedData);
+      const parsedData = JSON.parse(cachedData) as ExchangeRateSymbol[];
+
+      return parsedData;
     }
 
     const { data } = await Axios.get<{ symbols: ExchangeRateSymbols }>(
