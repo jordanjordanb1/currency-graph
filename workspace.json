@@ -15,10 +15,7 @@
             "main": "apps/currency-graph/src/main.tsx",
             "polyfills": "apps/currency-graph/src/polyfills.ts",
             "tsConfig": "apps/currency-graph/tsconfig.app.json",
-            "assets": [
-              "apps/currency-graph/src/favicon.ico",
-              "apps/currency-graph/src/assets"
-            ],
+            "assets": ["apps/currency-graph/src/assets"],
             "styles": [],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
