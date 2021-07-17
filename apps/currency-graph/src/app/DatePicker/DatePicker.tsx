@@ -24,7 +24,6 @@ export const DatePicker: FC<
             color="primary"
             size="small"
             {...params}
-            error={false}
           />
         )}
         {...rest}

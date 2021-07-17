@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
 import { FC, memo, Suspense } from 'react';
 import { RecoilRoot } from 'recoil';
+import GraphContainer from './GraphContainer';
 import InputBar from './InputBar';
 
 export const App: FC = memo(() => {
@@ -12,7 +13,7 @@ export const App: FC = memo(() => {
             <InputBar />
           </Grid>
           <Grid item xs={12}>
-            <h1>Graph</h1>
+            <GraphContainer />
           </Grid>
         </Grid>
       </Suspense>
