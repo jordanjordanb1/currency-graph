@@ -15,7 +15,8 @@ export const baseCurrencyQuery = selector({
   get: async () => {
     const hasSessionStorage = 'sessionStorage' in window;
 
-    const cachedData = hasSessionStorage && sessionStorage.getItem('currencys');
+    const cachedData =
+      hasSessionStorage && sessionStorage.getItem('currencies');
 
     if (cachedData) {
       const parsedData = JSON.parse(cachedData) as ExchangeRateSymbol[];
@@ -30,7 +31,7 @@ export const baseCurrencyQuery = selector({
     const symbols = Object.values(data.symbols);
 
     if (hasSessionStorage) {
-      sessionStorage.setItem('currencys', JSON.stringify(symbols));
+      sessionStorage.setItem('currencies', JSON.stringify(symbols));
     }
 
     return symbols;
