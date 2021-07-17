@@ -3,6 +3,7 @@ import { FC, memo, Suspense } from 'react';
 import Skeleton from '../Skeleton';
 import BaseCurrency from './BaseCurrency';
 import EndDate from './EndDate';
+import Options from './Options';
 import StartDate from './StartDate';
 
 export const InputBar: FC = memo(() => {
@@ -24,6 +25,9 @@ export const InputBar: FC = memo(() => {
           </Grid>
           <Grid item xs={12} md={3} xl={2}>
             <EndDate />
+          </Grid>
+          <Grid item xs={12} md={2} xl={2}>
+            <Options />
           </Grid>
         </Suspense>
       </Grid>

@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import { FC, memo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { baseCurrencyFilterState, baseCurrencyQuery } from '../../../store';
+import { baseCurrencyFilterState, currenciesQuery } from '../../../store';
 import { countryToFlag } from '../../../utils';
 
 type ExchangeRateSymbol = {
@@ -13,14 +13,14 @@ type ExchangeRateSymbol = {
 };
 
 export const BaseCurrency: FC = memo(() => {
-  const baseCurrency = useRecoilValue(baseCurrencyQuery);
+  const currencies = useRecoilValue(currenciesQuery);
   const [, setCurrency] = useRecoilState(baseCurrencyFilterState);
   const [value, setValue] = useState<ExchangeRateSymbol>({
     code: 'USD',
     description: 'United States Dollar',
   });
   const [open, setOpen] = useState(false);
-  const loading = open && !baseCurrency.length;
+  const loading = open && !currencies.length;
 
   const handleOnOpen = () => setOpen(true);
   const handleOnClose = () => setOpen(false);
@@ -51,7 +51,7 @@ export const BaseCurrency: FC = memo(() => {
       onChange={handleChange}
       isOptionEqualToValue={handleIsOptionEqualToValue}
       getOptionLabel={handleGetOptionLabel}
-      options={baseCurrency}
+      options={currencies}
       loading={loading}
       renderOption={(props, option) => (
         <Box

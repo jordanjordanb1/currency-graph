@@ -14,3 +14,8 @@ export const endDateFilterState = atom<Date | null>({
   key: 'endDateFilterState',
   default: new Date(),
 });
+
+export const selectedCurrenciesFilterState = atom<string[]>({
+  key: 'selectedCurrenciesFilterState',
+  default: ['CAD', 'RUB', 'EUR', 'GBP'],
+});
