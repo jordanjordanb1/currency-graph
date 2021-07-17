@@ -10,8 +10,8 @@ type ExchangeRateSymbols = {
   [key: string]: ExchangeRateSymbol;
 };
 
-export const currencyQuery = selector({
-  key: 'currencyState',
+export const baseCurrencyQuery = selector({
+  key: 'baseCurrencyState',
   get: async () => {
     const hasSessionStorage = 'sessionStorage' in window;
 

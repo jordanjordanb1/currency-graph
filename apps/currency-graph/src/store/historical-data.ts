@@ -1,7 +1,7 @@
 import { selector } from 'recoil';
 import { getHistoricalRates } from '../utils';
 import {
-  currencyFilterState,
+  baseCurrencyFilterState,
   endDateFilterState,
   startDateFilterState,
 } from './filter';
@@ -9,7 +9,7 @@ import {
 export const historicalDataQuery = selector({
   key: 'historicalDataSelector',
   get: async ({ get }) => {
-    const currency = get(currencyFilterState);
+    const baseCurrency = get(baseCurrencyFilterState);
     const start = get(startDateFilterState);
     const end = get(endDateFilterState);
 
@@ -17,7 +17,7 @@ export const historicalDataQuery = selector({
       return [];
     }
 
-    const rates = await getHistoricalRates(currency, start, end);
+    const rates = await getHistoricalRates(baseCurrency, start, end);
 
     return rates;
   },

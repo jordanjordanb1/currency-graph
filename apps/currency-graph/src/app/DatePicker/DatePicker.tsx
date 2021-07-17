@@ -23,6 +23,7 @@ export const DatePicker: FC<
             variant="filled"
             color="primary"
             size="small"
+            fullWidth
             {...params}
           />
         )}

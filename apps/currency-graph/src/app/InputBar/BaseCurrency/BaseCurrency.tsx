@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import { FC, memo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { currencyFilterState, currencyQuery } from '../../../store';
+import { baseCurrencyFilterState, baseCurrencyQuery } from '../../../store';
 import { countryToFlag } from '../../../utils';
 
 type ExchangeRateSymbol = {
@@ -12,15 +12,15 @@ type ExchangeRateSymbol = {
   code: string;
 };
 
-export const Currency: FC = memo(() => {
-  const currency = useRecoilValue(currencyQuery);
-  const [, setCurrency] = useRecoilState(currencyFilterState);
+export const BaseCurrency: FC = memo(() => {
+  const baseCurrency = useRecoilValue(baseCurrencyQuery);
+  const [, setCurrency] = useRecoilState(baseCurrencyFilterState);
   const [value, setValue] = useState<ExchangeRateSymbol>({
     code: 'USD',
     description: 'United States Dollar',
   });
   const [open, setOpen] = useState(false);
-  const loading = open && !currency.length;
+  const loading = open && !baseCurrency.length;
 
   const handleOnOpen = () => setOpen(true);
   const handleOnClose = () => setOpen(false);
@@ -41,7 +41,7 @@ export const Currency: FC = memo(() => {
 
   return (
     <Autocomplete
-      sx={{ width: 400 }}
+      fullWidth
       disableClearable
       autoHighlight
       open={open}
@@ -51,7 +51,7 @@ export const Currency: FC = memo(() => {
       onChange={handleChange}
       isOptionEqualToValue={handleIsOptionEqualToValue}
       getOptionLabel={handleGetOptionLabel}
-      options={currency}
+      options={baseCurrency}
       loading={loading}
       renderOption={(props, option) => (
         <Box
@@ -69,7 +69,8 @@ export const Currency: FC = memo(() => {
           {...params}
           size="small"
           variant="filled"
-          label="Country Code"
+          label="Base Currency"
+          fullWidth
           InputProps={{
             ...params.InputProps,
             endAdornment: (

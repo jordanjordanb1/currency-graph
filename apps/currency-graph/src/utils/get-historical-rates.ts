@@ -1,11 +1,11 @@
 import Axios from 'axios';
 
 type Rates = {
-  [currency: string]: number;
+  [baseCurrency: string]: number;
 };
 
 export const getHistoricalRates = async (
-  currency: string,
+  baseCurrency: string,
   end: Date = new Date(),
   start: Date = new Date()
 ) => {
@@ -19,10 +19,10 @@ export const getHistoricalRates = async (
 
   const [{ data: startData }, { data: endData }] = await Promise.all([
     Axios.get<{ rates: Rates }>(
-      `https://api.exchangerate.host/${formattedStart}?base=${currency}`
+      `https://api.exchangerate.host/${formattedStart}?base=${baseCurrency}`
     ),
     Axios.get<{ rates: Rates }>(
-      `https://api.exchangerate.host/${formattedEnd}?base=${currency}`
+      `https://api.exchangerate.host/${formattedEnd}?base=${baseCurrency}`
     ),
   ]);
 

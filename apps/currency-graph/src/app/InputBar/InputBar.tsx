@@ -1,26 +1,26 @@
 import { Grid, Paper } from '@material-ui/core';
 import { FC, memo } from 'react';
-import Currency from './Currency';
+import BaseCurrency from './BaseCurrency';
 import EndDate from './EndDate';
 import StartDate from './StartDate';
 
 export const InputBar: FC = memo(() => {
   return (
-    <Paper square sx={{ height: '100%', minHeight: 'max(100px, 10vh)' }}>
+    <Paper square>
       <Grid
         container
         spacing={2}
-        sx={{ padding: '8px', height: '100%' }}
+        sx={{ padding: 1, height: '100%', minHeight: 'max(100px, 10vh)' }}
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={12} md="auto">
-          <Currency />
+        <Grid item xs={12} md={4} xl={3}>
+          <BaseCurrency />
         </Grid>
-        <Grid item xs={12} md="auto">
+        <Grid item xs={12} md={3} xl={2}>
           <StartDate />
         </Grid>
-        <Grid item xs={12} md="auto">
+        <Grid item xs={12} md={3} xl={2}>
           <EndDate />
         </Grid>
       </Grid>
