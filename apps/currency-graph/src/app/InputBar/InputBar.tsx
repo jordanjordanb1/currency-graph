@@ -1,5 +1,6 @@
 import { Grid, Paper } from '@material-ui/core';
-import { FC, memo } from 'react';
+import { FC, memo, Suspense } from 'react';
+import Skeleton from '../Skeleton';
 import BaseCurrency from './BaseCurrency';
 import EndDate from './EndDate';
 import StartDate from './StartDate';
@@ -14,15 +15,17 @@ export const InputBar: FC = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={12} md={4} xl={3}>
-          <BaseCurrency />
-        </Grid>
-        <Grid item xs={12} md={3} xl={2}>
-          <StartDate />
-        </Grid>
-        <Grid item xs={12} md={3} xl={2}>
-          <EndDate />
-        </Grid>
+        <Suspense fallback={<Skeleton />}>
+          <Grid item xs={12} md={4} xl={3}>
+            <BaseCurrency />
+          </Grid>
+          <Grid item xs={12} md={3} xl={2}>
+            <StartDate />
+          </Grid>
+          <Grid item xs={12} md={3} xl={2}>
+            <EndDate />
+          </Grid>
+        </Suspense>
       </Grid>
     </Paper>
   );

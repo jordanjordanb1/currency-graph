@@ -1,6 +1,7 @@
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { FC, memo } from 'react';
+import { FC, memo, Suspense } from 'react';
+import Skeleton from '../Skeleton';
 import Graph from './Graph';
 
 export const GraphContainer: FC = memo(() => {
@@ -12,7 +13,9 @@ export const GraphContainer: FC = memo(() => {
     >
       <Grid container sx={{ height: '80vh' }} justifyContent="center">
         <Grid item xs={11} sx={{ height: '100%', width: '100%' }}>
-          <Graph />
+          <Suspense fallback={<Skeleton />}>
+            <Graph />
+          </Suspense>
         </Grid>
       </Grid>
     </Paper>

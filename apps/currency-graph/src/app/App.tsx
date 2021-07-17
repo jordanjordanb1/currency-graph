@@ -7,16 +7,14 @@ import InputBar from './InputBar';
 export const App: FC = memo(() => {
   return (
     <RecoilRoot>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Grid container>
-          <Grid item xs={12}>
-            <InputBar />
-          </Grid>
-          <Grid item xs={12}>
-            <GraphContainer />
-          </Grid>
+      <Grid container>
+        <Grid item xs={12}>
+          <InputBar />
         </Grid>
-      </Suspense>
+        <Grid item xs={12}>
+          <GraphContainer />
+        </Grid>
+      </Grid>
     </RecoilRoot>
   );
 });
